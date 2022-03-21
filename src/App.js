@@ -2,8 +2,11 @@ import "./App.css";
 
 // Components
 import Keyboard from "./Keyboard"
+import Tiles from "./Tiles"
 
 function App() {
+
+
 
   return (
     <div className="App">
@@ -12,7 +15,7 @@ function App() {
           <h1>Wordle</h1>
         </div>
         <div className="message-container"></div>
-        <div className="tile-container"></div>
+        <Tiles />
         <Keyboard />
       </div>
     </div>

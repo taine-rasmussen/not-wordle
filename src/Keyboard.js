@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Keyboard = () => {
+const Keyboard = (props) => {
+  const {
+    handleClick,
+  } = props
+
   const keys = [
     "Q",
     "W",
@@ -31,12 +35,14 @@ const Keyboard = () => {
     "M",
     "«",
   ];
+
   return (
     <div className="key-container">
       {keys.map((key) => (
         <button
           key={key}
           id={key}
+          onClick={() => { handleClick(key) }}
         >{key}</button>
       ))}
     </div>

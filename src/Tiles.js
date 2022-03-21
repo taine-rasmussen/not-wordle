@@ -1,15 +1,11 @@
 import React from 'react'
 
-const Tiles = () => {
+const Tiles = (props) => {
 
-  const guessRows = [
-    ['', '', '', '', '',],
-    ['', '', '', '', '',],
-    ['', '', '', '', '',],
-    ['', '', '', '', '',],
-    ['', '', '', '', '',],
-    ['', '', '', '', '',]
-  ];
+  const {
+    keyInput,
+    guessRows,
+  } = props
 
   return (
     <div className="tile-container">
@@ -18,8 +14,12 @@ const Tiles = () => {
           <div id={`guess-row-index-${i}`} key={i}>
             {row.map((tile, j) => {
               return (
-                <div id={`guess-row-index-${i}-tile-${j}`} className='tile'>
-
+                <div
+                  id={`guess-row-index-${i}-tile-${j}`}
+                  className='tile'
+                  key={j}
+                >
+                  {tile}
                 </div>
               )
             })}

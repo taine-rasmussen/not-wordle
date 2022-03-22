@@ -3,7 +3,6 @@ import React from 'react'
 const Tiles = (props) => {
 
   const {
-    keyInput,
     guessRows,
   } = props
 

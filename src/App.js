@@ -23,13 +23,11 @@ function App() {
   ])
 
   const handleClick = (key) => {
-    setGuessRows([...guessRows], guessRows[tileTracker.currentRow][tileTracker.currentTile] = key)
-
-    // if (tileTracker.currentTile == 5) {
-    //   return tileTracker.currentRow++, tileTracker.currentTile = 0
-    // } else {
-    //   return tileTracker.currentTile++
-    // }
+    if (tileTracker.currentTile > 4) {
+      return tileTracker.currentRow++, tileTracker.currentTile = 0, setGuessRows([...guessRows], guessRows[tileTracker.currentRow][tileTracker.currentTile] = key)
+    } else {
+      return setGuessRows([...guessRows], guessRows[tileTracker.currentRow][tileTracker.currentTile] = key), tileTracker.currentTile++
+    }
   }
 
   return (

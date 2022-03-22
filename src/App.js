@@ -23,6 +23,12 @@ function App() {
   ])
 
   const handleClick = (key) => {
+    if (tileTracker.currentRow == 5 && tileTracker.currentTile == 5) return;
+
+    if (tileTracker.currentRow > 0 && tileTracker.currentTile == 0) {
+      return tileTracker.currentTile = 1, setGuessRows([...guessRows], guessRows[tileTracker.currentRow][tileTracker.currentTile] = key), tileTracker.currentTile = tileTracker.currentTile + 1
+    }
+
     if (tileTracker.currentTile > 4) {
       return tileTracker.currentRow++, tileTracker.currentTile = 0, setGuessRows([...guessRows], guessRows[tileTracker.currentRow][tileTracker.currentTile] = key)
     } else {

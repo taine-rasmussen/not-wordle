@@ -3,47 +3,18 @@ import React from 'react'
 const Keyboard = (props) => {
   const {
     handleClick,
+    keys
   } = props
-
-  const keys = [
-    "Q",
-    "W",
-    "E",
-    "R",
-    "T",
-    "Y",
-    "U",
-    "I",
-    "O",
-    "P",
-    "A",
-    "S",
-    "D",
-    "F",
-    "G",
-    "H",
-    "J",
-    "K",
-    "L",
-    "ENTER",
-    "Z",
-    "X",
-    "C",
-    "V",
-    "B",
-    "N",
-    "M",
-    "«",
-  ];
 
   return (
     <div className="key-container">
       {keys.map((key) => (
         <button
-          key={key}
-          id={key}
-          onClick={() => { handleClick(key) }}
-        >{key}</button>
+          key={key.key}
+          id={key.key}
+          onClick={() => { handleClick(key.key) }}
+          style={key.match == 'EXACT' ? { backgroundColor: '#6aa964' } : key.match == 'FOUND' ? { backgroundColor: '#c8b458' } : null}
+        >{key.key}</button>
       ))}
     </div>
   )

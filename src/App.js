@@ -80,13 +80,21 @@ function App() {
         if (letter == i && submittedWord.indexOf(letter) == currentWord.indexOf(i)) {
           keys.map((key) => {
             if (key.key == letter) {
-              return [...keys], key.match = 'EXACT'
+              if (key.match == 'FOUND' || key.match == '') {
+                return [...keys], key.match = 'EXACT'
+              } else {
+                return;
+              }
             }
           })
         } else if (letter == i) {
           keys.map((key) => {
             if (key.key == letter) {
-              return [...keys], key.match = 'FOUND'
+              if (key.match == "EXACT") {
+                return;
+              } else if (key.match == '') {
+                return [...keys], key.match = 'FOUND'
+              }
             }
           })
         }
@@ -104,6 +112,7 @@ function App() {
         <div className="message-container"></div>
         <Tiles
           guessRows={guessRows}
+          keys={keys}
         />
         <Keyboard
           handleClick={handleClick}

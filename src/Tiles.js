@@ -4,6 +4,7 @@ const Tiles = (props) => {
 
   const {
     guessRows,
+    keys
   } = props
 
   return (
@@ -17,6 +18,7 @@ const Tiles = (props) => {
                   id={`guess-row-index-${i}-tile-${j}`}
                   className='tile'
                   key={j}
+                // style={key.match == 'EXACT' ? { backgroundColor: '#6aa964' } : key.match == 'FOUND' ? { backgroundColor: '#c8b458' } : null}
                 >
                   {tile}
                 </div>

@@ -55,8 +55,12 @@ function App() {
   const handleClick = (key) => {
     // Checks if key is == Enter and runs enter func if true
     if (key == 'ENTER' && letter.currentTile == 5) {
-      return handleEnterClick();
+      return handleSubmit();
     } else if (key == 'ENTER') return;
+
+    if (key == '«') {
+      return handleDelete();
+    }
 
     // Early return if user attempts input on last tile of last row
     if (letter.currentRow == 5 && letter.currentTile == 5) return;
@@ -71,7 +75,11 @@ function App() {
     }
   }
 
-  const handleEnterClick = () => {
+  const handleDelete = () => {
+    return letter.currentTile = letter.currentTile - 1, setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = '')
+  }
+
+  const handleSubmit = () => {
     let submittedWord = guessRows[letter.currentRow];
     let currentWord = wordle.split('')
 

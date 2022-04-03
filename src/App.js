@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 
 // Components
 import Keyboard from "./Keyboard"
@@ -52,21 +52,15 @@ function App() {
     { key: 'ENTER', match: '' },
   ])
 
+
   const handleClick = (key) => {
-    // Checks if key is == Enter and runs enter func if true
     if (key == 'ENTER' && letter.currentTile == 5) {
       return handleSubmit();
     } else if (key == 'ENTER') return;
 
-    if (key == '«') {
-      return handleDelete();
-    }
-
-    // Early return if user attempts input on last tile of last row
+    if (key == '«') return handleDelete();
     if (letter.currentRow == 5 && letter.currentTile == 5) return;
-    // Early return if user is at end of current row
     if (letter.currentTile == 5) return;
-
 
     if (letter.currentTile > 4) {
       return letter.currentRow++, letter.currentTile = 0, setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = key)
@@ -83,7 +77,7 @@ function App() {
     let submittedWord = guessRows[letter.currentRow];
     let currentWord = wordle.split('')
 
-    submittedWord.forEach((letter) => {
+    submittedWord.map((letter) => {
       currentWord.map((i) => {
         if (letter == i && submittedWord.indexOf(letter) == currentWord.indexOf(i)) {
           keys.map((key) => {
@@ -108,7 +102,7 @@ function App() {
         }
       })
     })
-    return letter.currentRow++, letter.currentTile = 0
+    return letter.currentRow++, letter.currentTile = 0, handleClick(), letter.currentTile = 0;
   };
 
   return (

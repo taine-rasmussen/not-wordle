@@ -1,14 +1,16 @@
 import "./App.css";
-import { useState, useMemo } from 'react'
+import { useState, useCallBack, useCallback } from 'react'
 
 // Components
 import Keyboard from "./Keyboard"
 import Tiles from "./Tiles"
+import { WinningScreen } from "./WinningScreen"
 
 function App() {
 
   const wordle = 'SUPER'
 
+  const [winState, setWinState] = useState(false)
   const [letter, setletter] = useState({
     currentRow: 0,
     currentTile: 0
@@ -52,7 +54,6 @@ function App() {
     { key: 'ENTER', match: '' },
   ])
 
-
   const handleClick = (key) => {
     if (key == 'ENTER' && letter.currentTile == 5) {
       return handleSubmit();
@@ -95,33 +96,46 @@ function App() {
               if (key.match == "EXACT") {
                 return;
               } else if (key.match == '') {
-                return [...keys], key.match = 'FOUND'
+                return [...keys], key.match = 'FOUND';
               }
             }
           })
         }
       })
     })
+    checkForWin();
     return letter.currentRow++, letter.currentTile = 0, handleClick(), letter.currentTile = 0;
   };
 
+  const checkForWin = () => {
+    return guessRows[letter.currentRow].join('') == wordle ? setWinState(true) : null
+  };
+
+
+
   return (
-    <div className="App">
-      <div className="game-container">
-        <div className="title-container">
-          <h1>Wordle</h1>
+    <>
+      {winState == true ? (
+        <WinningScreen />
+      ) : (
+        <div className="App">
+          <div className="game-container">
+            <div className="title-container">
+              <h1>Wordle</h1>
+            </div >
+            <div className="message-container"></div>
+            <Tiles
+              guessRows={guessRows}
+              keys={keys}
+            />
+            <Keyboard
+              handleClick={handleClick}
+              keys={keys}
+            />
+          </div>
         </div>
-        <div className="message-container"></div>
-        <Tiles
-          guessRows={guessRows}
-          keys={keys}
-        />
-        <Keyboard
-          handleClick={handleClick}
-          keys={keys}
-        />
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

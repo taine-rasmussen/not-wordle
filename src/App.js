@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useCallBack, useCallback } from 'react'
+import { useState, useMemo } from 'react'
 
 // Components
 import Keyboard from "./Keyboard"
@@ -53,6 +53,32 @@ function App() {
     { key: 'M', match: '' },
     { key: 'ENTER', match: '' },
   ])
+  const [gameSession, setGameSession] = useState([{
+    wins: 0,
+    currentTurn: 0,
+    totalAttemps: {
+      one: 0,
+      two: 0,
+      three: 0,
+      four: 0,
+      five: 0
+    }
+  }])
+
+
+  // const flipTiles = () => {
+  //   guessRows.map((cell) => {
+  //     keys.map((key) => {
+  //       if (key.key == cell && key.match == 'EXACT') {
+  //         console.log('exact match:', key, cell)
+  //       } else if (key.key == cell && key.match == 'FOUND') {
+  //         console.log('Found:', key, cell)
+  //       } else {
+  //         return;
+  //       }
+  //     })
+  //   })
+  // }
 
   const handleClick = (key) => {
     if (key == 'ENTER' && letter.currentTile == 5) {
@@ -77,7 +103,6 @@ function App() {
   const handleSubmit = () => {
     let submittedWord = guessRows[letter.currentRow];
     let currentWord = wordle.split('')
-
     submittedWord.map((letter) => {
       currentWord.map((i) => {
         if (letter == i && submittedWord.indexOf(letter) == currentWord.indexOf(i)) {
@@ -116,7 +141,13 @@ function App() {
   return (
     <>
       {winState == true ? (
-        <WinningScreen />
+        <WinningScreen
+          setWinState={setWinState}
+          gameSession={gameSession}
+          setGameSession={setGameSession}
+          letter={letter}
+          guessRows={guessRows}
+        />
       ) : (
         <div className="App">
           <div className="game-container">

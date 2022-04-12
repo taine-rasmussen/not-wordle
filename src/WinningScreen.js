@@ -1,22 +1,41 @@
-import React, { useMemo, useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 
 export const WinningScreen = (props) => {
 
   const {
-    setWinState,
+    winState,
     gameSession,
     setGameSession,
     letter,
-    guessRows
+    guessRows,
+    updateWinCount,
+    handleGameReset
   } = props
 
   useEffect(() => {
-    return setGameSession([...gameSession], gameSession[0].wins++)
-  }, [])
+    updateWinCount();
+  }, [winState])
+
 
   return (
-    <div>
-      <h1>Attemps: {letter.currentRow}</h1>
+    <div className='winningscreen-container'>
+      <div className='winningscreen-header'>
+        <h1>Congratulations!</h1>
+        <h3>You solved the wordle</h3>
+      </div>
+      <div className='winningscreen-stats-container'>
+        <ul>
+          <li>Rounds to solve: {letter.currentRow}</li>
+          <li>Total wins: {gameSession[0].wins}</li>
+        </ul>
+      </div>
+      <div className='winningscreen-footer'>
+        <button
+          onClick={handleGameReset}
+        >
+          Play again
+        </button>
+      </div>
     </div>
   )
 }

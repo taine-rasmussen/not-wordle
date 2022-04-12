@@ -8,6 +8,10 @@ body {
   background-color: #121213;
 }
 
+ul {
+  list-style: none;
+}
+
 .game-container {
   height: 90vh;
   display: flex;
@@ -75,4 +79,30 @@ body {
 
 .tile:hover {
   background-color: #3a3a3c;
+}
+
+.winningscreen-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.winningscreen-header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 2rem;
+}
+
+.winningscreen-header h1 {
+  margin-bottom: -2rem;
+}
+
+.winningscreen-stats-container {
+  display: flex;
+  width: 70%;
+  height: 60%;
+  font-size: 2rem;
+  margin-top: 2rem;
 }

@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 
 // Components
 import Keyboard from "./Keyboard"
@@ -80,6 +80,54 @@ function App() {
   //   })
   // }
 
+
+  const handleGameReset = useCallback(
+    () => {
+      setGuessRows([
+        ['', '', '', '', '',],
+        ['', '', '', '', '',],
+        ['', '', '', '', '',],
+        ['', '', '', '', '',],
+        ['', '', '', '', '',],
+        ['', '', '', '', '',]
+      ]);
+      setletter({
+        currentRow: 0,
+        currentTile: 0
+      });
+      setKeys([
+        { key: 'Q', match: '' },
+        { key: 'W', match: '' },
+        { key: 'E', match: '' },
+        { key: 'R', match: '' },
+        { key: 'T', match: '' },
+        { key: 'Y', match: '' },
+        { key: 'U', match: '' },
+        { key: 'I', match: '' },
+        { key: 'O', match: '' },
+        { key: 'P', match: '' },
+        { key: 'A', match: '' },
+        { key: 'S', match: '' },
+        { key: 'D', match: '' },
+        { key: 'F', match: '' },
+        { key: 'G', match: '' },
+        { key: 'H', match: '' },
+        { key: 'J', match: '' },
+        { key: 'K', match: '' },
+        { key: 'L', match: '' },
+        { key: '«', match: '' },
+        { key: 'Z', match: '' },
+        { key: 'X', match: '' },
+        { key: 'C', match: '' },
+        { key: 'V', match: '' },
+        { key: 'B', match: '' },
+        { key: 'N', match: '' },
+        { key: 'M', match: '' },
+        { key: 'ENTER', match: '' },
+      ])
+      setWinState(false);
+    }, [])
+
   const handleClick = (key) => {
     if (key == 'ENTER' && letter.currentTile == 5) {
       return handleSubmit();
@@ -136,12 +184,18 @@ function App() {
     return guessRows[letter.currentRow].join('') == wordle ? setWinState(true) : null
   };
 
-
+  const updateWinCount = useCallback(
+    () => {
+      setGameSession([...gameSession], gameSession[0].wins++)
+    }, [winState])
 
   return (
     <>
       {winState == true ? (
         <WinningScreen
+          handleGameReset={handleGameReset}
+          updateWinCount={updateWinCount}
+          winState={winState}
           setWinState={setWinState}
           gameSession={gameSession}
           setGameSession={setGameSession}

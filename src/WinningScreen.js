@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 
+import { StatsGraph } from './StatsGraph'
+
 export const WinningScreen = (props) => {
 
   const {
@@ -28,6 +30,9 @@ export const WinningScreen = (props) => {
           <li>Solved in {letter.currentRow} rounds</li>
           <li>Total wins: {gameSession[0].wins}</li>
         </ul>
+        <StatsGraph
+          gameSession={gameSession}
+        />
       </div>
       <div className='winningscreen-footer'>
         <button

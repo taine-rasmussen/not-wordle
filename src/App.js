@@ -10,7 +10,7 @@ function App() {
 
   const wordle = 'SUPER'
 
-  const [winState, setWinState] = useState(false)
+  const [winState, setWinState] = useState(true)
   const [letter, setletter] = useState({
     currentRow: 0,
     currentTile: 0
@@ -57,11 +57,11 @@ function App() {
     wins: 0,
     currentTurn: 0,
     totalAttemps: {
-      one: 0,
-      two: 0,
-      three: 0,
-      four: 0,
-      five: 0
+      one: 3,
+      two: 4,
+      three: 6,
+      four: 2,
+      five: 1
     }
   }])
 
@@ -127,6 +127,8 @@ function App() {
       ])
       setWinState(false);
     }, [])
+
+  // create memoised versions of the above states to used those variables to reset back to instead of what is happening here. Good job getting it working tho
 
   const handleClick = (key) => {
     if (key == 'ENTER' && letter.currentTile == 5) {

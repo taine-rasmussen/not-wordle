@@ -25,7 +25,7 @@ export const WinningScreen = (props) => {
       </div>
       <div className='winningscreen-stats-container'>
         <ul>
-          <li>Rounds to solve: {letter.currentRow}</li>
+          <li>Solved in {letter.currentRow} rounds</li>
           <li>Total wins: {gameSession[0].wins}</li>
         </ul>
       </div>

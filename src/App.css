@@ -109,21 +109,4 @@ ul {
 }
 
 .graph-container {
-  display: flex;
-  height: 50%;
-  flex-direction: column;
-}
-
-.graph-row {
-  margin: 5px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-
-.graph-block {
-  height: 20%;
-  width: 28%;
-  background-color: #aeb8bd;
-  margin: 3px;
 }

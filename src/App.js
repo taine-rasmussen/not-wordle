@@ -153,6 +153,7 @@ function App() {
   const handleSubmit = () => {
     let submittedWord = guessRows[letter.currentRow];
     let currentWord = wordle.split('')
+
     submittedWord.map((letter) => {
       currentWord.map((i) => {
         if (letter == i && submittedWord.indexOf(letter) == currentWord.indexOf(i)) {

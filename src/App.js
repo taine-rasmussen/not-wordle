@@ -187,8 +187,10 @@ function App() {
 
   const updateWinCount = useCallback(
     () => {
-      setGameSession([...gameSession], gameSession[0].wins++)
+      setGameSession([...gameSession], gameSession[0].wins = gameSession[0].wins + 1)
     }, [winState])
+
+  // Need to add function that updates total attemps
 
   return (
     <>

@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 
 // Components
 import Keyboard from "./Keyboard"
@@ -10,7 +10,7 @@ function App() {
 
   const wordle = 'SUPER'
 
-  const [winState, setWinState] = useState(true)
+  const [winState, setWinState] = useState(false)
   const [letter, setletter] = useState({
     currentRow: 0,
     currentTile: 0
@@ -65,7 +65,6 @@ function App() {
     }
   }])
 
-
   // const flipTiles = () => {
   //   guessRows.map((cell) => {
   //     keys.map((key) => {
@@ -79,7 +78,6 @@ function App() {
   //     })
   //   })
   // }
-
 
   const handleGameReset = useCallback(
     () => {
@@ -128,7 +126,7 @@ function App() {
       setWinState(false);
     }, [])
 
-  // create memoised versions of the above states to used those variables to reset back to instead of what is happening here. Good job getting it working tho
+  // create memoised versions of the above states and use those variables to reset back to instead of what is happening here. Good job getting it working tho
 
   const handleClick = (key) => {
     if (key == 'ENTER' && letter.currentTile == 5) {

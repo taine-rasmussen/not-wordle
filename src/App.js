@@ -10,7 +10,7 @@ function App() {
 
   const wordle = 'SUPER'
 
-  const [winState, setWinState] = useState(false)
+  const [winState, setWinState] = useState(true)
   const [letter, setletter] = useState({
     currentRow: 0,
     currentTile: 0

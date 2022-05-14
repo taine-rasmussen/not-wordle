@@ -23,10 +23,6 @@ export const WinningScreen = (props) => {
         <h3>You solved the wordle!</h3>
       </div>
       <div className='winningscreen-stats-container'>
-        <ul>
-          <li>Solved in {letter.currentRow} rounds</li>
-          <li>Total wins: {gameSession[0].wins}</li>
-        </ul>
         <StatsGraph
           gameSession={gameSession}
         />

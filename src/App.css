@@ -88,6 +88,22 @@ ul {
   align-items: center;
 }
 
+.winningscreen-container button {
+  color: #fbf7f5;
+  background-color: #3a3a3c;
+  border: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 7.5px;
+  font-size: 1.5rem;
+}
+
+.winningscreen-container button:hover {
+  color: #fbf7f5;
+  background-color: #3a3a3c;
+  font-size: 1.52rem;
+  cursor: pointer;
+}
+
 .winningscreen-header {
   display: flex;
   align-items: center;

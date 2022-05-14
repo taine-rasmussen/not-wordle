@@ -34,7 +34,7 @@ export const StatsGraph = (props) => {
       {
         label: 'Total attemps',
         data: gameSession[0].totalAttemps,
-        backgroundColor: '#aeb8bd',
+        backgroundColor: '#3a3a3c',
       },
     ],
   };

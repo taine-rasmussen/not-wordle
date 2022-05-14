@@ -56,13 +56,7 @@ function App() {
   const [gameSession, setGameSession] = useState([{
     wins: 0,
     currentTurn: 0,
-    totalAttemps: {
-      one: 3,
-      two: 4,
-      three: 6,
-      four: 2,
-      five: 1
-    }
+    totalAttemps: [1, 2, 4, 5, 2]
   }])
 
   // const flipTiles = () => {
@@ -188,9 +182,8 @@ function App() {
   const updateWinCount = useCallback(
     () => {
       setGameSession([...gameSession], gameSession[0].wins = gameSession[0].wins + 1)
+      setGameSession([...gameSession], gameSession[0].totalAttemps[letter.currentRow - 1] = gameSession[0].totalAttemps[letter.currentRow - 1] + 1)
     }, [winState])
-
-  // Need to add function that updates total attemps
 
   return (
     <>

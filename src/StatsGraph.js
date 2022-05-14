@@ -26,10 +26,7 @@ export const StatsGraph = (props) => {
     Legend
   );
 
-  const labels = Object.keys(gameSession[0].totalAttemps);
-  const options = {
-
-  };
+  const labels = [1, 2, 3, 4, 5]
 
   const data = {
     labels,
@@ -44,7 +41,7 @@ export const StatsGraph = (props) => {
 
   return (
     <div className='graph-container'>
-      <Bar options={options} data={data} />
+      <Bar data={data} />
     </div>
   )
 }

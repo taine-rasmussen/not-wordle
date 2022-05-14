@@ -9,15 +9,13 @@ export const WinningScreen = (props) => {
     gameSession,
     setGameSession,
     letter,
-    guessRows,
-    updateWinCount,
-    handleGameReset
+    handleGameReset,
   } = props
 
   useEffect(() => {
-    updateWinCount();
+    setGameSession([...gameSession], gameSession[0].wins = gameSession[0].wins + 1)
+    setGameSession([...gameSession], gameSession[0].totalAttemps[letter.currentRow - 1] = gameSession[0].totalAttemps[letter.currentRow - 1] + 1)
   }, [winState])
-
 
   return (
     <div className='winningscreen-container'>

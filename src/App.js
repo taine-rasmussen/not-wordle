@@ -59,18 +59,6 @@ function App() {
     totalAttemps: [1, 2, 4, 5, 2]
   }])
 
-  // const flipTiles = useCallback(() => {
-  //   guessRows.map((row) => {
-  //     row.map((cell) => {
-  //       keys.map((key) => {
-  //         if (key.key == cell && key.match == 'FOUND') {
-  //           console.log(`It's a match, cell: ${cell} & key: ${key.key}!`)
-  //         }
-  //       })
-  //     })
-  //   })
-  // }, [winState])
-
   const handleGameReset = useCallback(
     () => {
       setGuessRows([
@@ -135,9 +123,6 @@ function App() {
 
   }
 
-  // Put dependinces on all these funcs
-  // Whatever is mapping on tiles needs to have access to Keys so it can have a teneray based inline styling that flips when Found / Exact use cases happens
-
   const handleDelete = () => {
     return letter.currentTile = letter.currentTile - 1,
       setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = '')
@@ -176,9 +161,10 @@ function App() {
     return letter.currentRow++, letter.currentTile = 0, handleClick(), letter.currentTile = 0;
   };
 
-  const checkForWin = () => {
-    return guessRows[letter.currentRow].join('') == wordle ? setWinState(true) : null
-  };
+  const checkForWin = useCallback(
+    () => {
+      return guessRows[letter.currentRow].join('') == wordle ? setWinState(true) : null
+    }, [winState]);
 
   const updateWinCount = useCallback(
     () => {

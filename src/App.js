@@ -10,7 +10,7 @@ function App() {
 
   const wordle = 'SUPER'
 
-  const [winState, setWinState] = useState(true)
+  const [winState, setWinState] = useState(false)
   const [letter, setletter] = useState({
     currentRow: 0,
     currentTile: 0
@@ -59,19 +59,17 @@ function App() {
     totalAttemps: [1, 2, 4, 5, 2]
   }])
 
-  // const flipTiles = () => {
-  //   guessRows.map((cell) => {
-  //     keys.map((key) => {
-  //       if (key.key == cell && key.match == 'EXACT') {
-  //         console.log('exact match:', key, cell)
-  //       } else if (key.key == cell && key.match == 'FOUND') {
-  //         console.log('Found:', key, cell)
-  //       } else {
-  //         return;
-  //       }
+  // const flipTiles = useCallback(() => {
+  //   guessRows.map((row) => {
+  //     row.map((cell) => {
+  //       keys.map((key) => {
+  //         if (key.key == cell && key.match == 'FOUND') {
+  //           console.log(`It's a match, cell: ${cell} & key: ${key.key}!`)
+  //         }
+  //       })
   //     })
   //   })
-  // }
+  // }, [winState])
 
   const handleGameReset = useCallback(
     () => {
@@ -120,8 +118,6 @@ function App() {
       setWinState(false);
     }, [])
 
-  // create memoised versions of the above states and use those variables to reset back to instead of what is happening here. Good job getting it working tho
-
   const handleClick = (key) => {
     if (key == 'ENTER' && letter.currentTile == 5) {
       return handleSubmit();
@@ -132,14 +128,19 @@ function App() {
     if (letter.currentTile == 5) return;
 
     if (letter.currentTile > 4) {
-      return letter.currentRow++, letter.currentTile = 0, setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = key)
+      return letter.currentRow++, letter.currentTile = 0, setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = key), console.log(guessRows)
     } else {
-      return setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = key), letter.currentTile++
+      return setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = key), letter.currentTile++, console.log(guessRows)
     }
+
   }
 
+  // Put dependinces on all these funcs
+  // Whatever is mapping on tiles needs to have access to Keys so it can have a teneray based inline styling that flips when Found / Exact use cases happens
+
   const handleDelete = () => {
-    return letter.currentTile = letter.currentTile - 1, setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = '')
+    return letter.currentTile = letter.currentTile - 1,
+      setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = '')
   }
 
   const handleSubmit = () => {

@@ -5,10 +5,9 @@ import { useState, useMemo, useCallback, useEffect } from 'react'
 import Keyboard from "./Keyboard"
 import Tiles from "./Tiles"
 import { WinningScreen } from "./WinningScreen"
+import wordList from "./Words"
 
 function App() {
-
-  const wordle = 'SUPER'
 
   const [winState, setWinState] = useState(false)
   const [letter, setletter] = useState({
@@ -106,6 +105,10 @@ function App() {
       setWinState(false);
     }, [])
 
+  const wordle = useMemo(() => {
+    return wordList[Math.floor(Math.random() * wordList.length)].toUpperCase()
+  }, [winState])
+
   const handleClick = (key) => {
     if (key == 'ENTER' && letter.currentTile == 5) {
       return handleSubmit();
@@ -118,7 +121,7 @@ function App() {
     if (letter.currentTile > 4) {
       return letter.currentRow++, letter.currentTile = 0, setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = key), console.log(guessRows)
     } else {
-      return setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = key), letter.currentTile++, console.log(guessRows)
+      return setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = key), letter.currentTile++, console.log(keys, wordle)
     }
 
   }

@@ -9,7 +9,7 @@ import wordList from "./Words"
 
 function App() {
 
-  const [winState, setWinState] = useState(false)
+  const [winState, setWinState] = useState(true)
   const [letter, setletter] = useState({
     currentRow: 0,
     currentTile: 0
@@ -192,7 +192,7 @@ function App() {
         <div className="App">
           <div className="game-container">
             <div className="title-container">
-              <h1>Wordle</h1>
+              <h1>{wordle}</h1>
             </div >
             <div className="message-container"></div>
             <Tiles
@@ -211,3 +211,5 @@ function App() {
 }
 
 export default App;
+
+// refactore guessRows state to have found attribute - need to solve indpendent tile issue

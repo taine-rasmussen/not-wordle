@@ -121,8 +121,9 @@ ul {
   width: 70%;
   height: 60%;
   font-size: 2rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
-.graph-container {
+.winningscreen-footer {
+  margin-top: 3rem;
 }

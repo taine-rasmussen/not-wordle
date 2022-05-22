@@ -9,19 +9,48 @@ import wordList from "./Words"
 
 function App() {
 
-  const [winState, setWinState] = useState(true)
+  const [winState, setWinState] = useState(false)
   const [letter, setletter] = useState({
     currentRow: 0,
     currentTile: 0
   })
   const [guessRows, setGuessRows] = useState([
-    ['', '', '', '', '',],
-    ['', '', '', '', '',],
-    ['', '', '', '', '',],
-    ['', '', '', '', '',],
-    ['', '', '', '', '',],
-    ['', '', '', '', '',]
-  ])
+    [
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } }
+    ],
+    [
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } }
+    ],
+    [
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } }
+    ],
+    [
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } }
+    ],
+    [
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } },
+      { key: '', style: { backgroundColor: '' } }
+    ]])
+
   const [keys, setKeys] = useState([
     { key: 'Q', match: '' },
     { key: 'W', match: '' },
@@ -60,14 +89,41 @@ function App() {
 
   const handleGameReset = useCallback(
     () => {
-      setGuessRows([
-        ['', '', '', '', '',],
-        ['', '', '', '', '',],
-        ['', '', '', '', '',],
-        ['', '', '', '', '',],
-        ['', '', '', '', '',],
-        ['', '', '', '', '',]
-      ]);
+      setGuessRows([[
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } }
+      ],
+      [
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } }
+      ],
+      [
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } }
+      ],
+      [
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } }
+      ],
+      [
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } },
+        { key: '', style: { backgroundColor: '' } }
+      ]]);
       setletter({
         currentRow: 0,
         currentTile: 0
@@ -119,20 +175,23 @@ function App() {
     if (letter.currentTile == 5) return;
 
     if (letter.currentTile > 4) {
-      return letter.currentRow++, letter.currentTile = 0, setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = key), console.log(guessRows)
+      return letter.currentRow++, letter.currentTile = 0,
+        setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile].key = key)
     } else {
-      return setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = key), letter.currentTile++, console.log(keys, wordle)
+      return setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile].key = key), letter.currentTile++
     }
-
   }
 
   const handleDelete = () => {
     return letter.currentTile = letter.currentTile - 1,
-      setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile] = '')
+      setGuessRows([...guessRows], guessRows[letter.currentRow][letter.currentTile].key = '')
   }
 
   const handleSubmit = () => {
-    let submittedWord = guessRows[letter.currentRow];
+    let submittedWord = []
+    guessRows[letter.currentRow].map((key) => {
+      return submittedWord.push(key.key)
+    })
     let currentWord = wordle.split('')
 
     submittedWord.map((letter) => {
@@ -166,7 +225,11 @@ function App() {
 
   const checkForWin = useCallback(
     () => {
-      return guessRows[letter.currentRow].join('') == wordle ? setWinState(true) : null
+      let submittedWord = []
+      guessRows[letter.currentRow].map((key) => {
+        return submittedWord.push(key.key)
+      })
+      return submittedWord.join('') == wordle ? setWinState(true) : null
     }, [winState]);
 
   const updateWinCount = useCallback(
@@ -174,6 +237,13 @@ function App() {
       setGameSession([...gameSession], gameSession[0].wins = gameSession[0].wins + 1)
       setGameSession([...gameSession], gameSession[0].totalAttemps[letter.currentRow - 1] = gameSession[0].totalAttemps[letter.currentRow - 1] + 1)
     }, [winState])
+
+
+
+
+  const updateTiles = () => {
+
+  }
 
   return (
     <>
@@ -197,7 +267,9 @@ function App() {
             <div className="message-container"></div>
             <Tiles
               guessRows={guessRows}
+              setGuessRows={setGuessRows}
               keys={keys}
+              letter={letter}
             />
             <Keyboard
               handleClick={handleClick}
@@ -211,5 +283,3 @@ function App() {
 }
 
 export default App;
-
-// refactore guessRows state to have found attribute - need to solve indpendent tile issue

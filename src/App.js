@@ -194,11 +194,11 @@ function App() {
     })
     let currentWord = wordle.split('')
 
-    submittedWord.map((letter) => {
+    submittedWord.map((letr) => {
       currentWord.map((i) => {
-        if (letter == i && submittedWord.indexOf(letter) == currentWord.indexOf(i)) {
+        if (letr == i && submittedWord.indexOf(letr) == currentWord.indexOf(i)) {
           keys.map((key) => {
-            if (key.key == letter) {
+            if (key.key == letr) {
               if (key.match == 'FOUND' || key.match == '') {
                 return [...keys], key.match = 'EXACT'
               } else {
@@ -206,19 +206,22 @@ function App() {
               }
             }
           })
-        } else if (letter == i) {
+        } else if (letr == i) {
           keys.map((key) => {
-            if (key.key == letter) {
+            if (key.key == letr) {
               if (key.match == "EXACT") {
                 return;
               } else if (key.match == '') {
                 return [...keys], key.match = 'FOUND';
+              } else {
+                return;
               }
             }
           })
         }
       })
     })
+    updateTiles()
     checkForWin();
     return letter.currentRow++, letter.currentTile = 0, handleClick(), letter.currentTile = 0;
   };
@@ -240,9 +243,13 @@ function App() {
 
 
 
-
+  // probably run this on handleSubmit.
   const updateTiles = () => {
+    keys.map((key) => {
+      if (key.match == 'EXACT') {
 
+      }
+    })
   }
 
   return (

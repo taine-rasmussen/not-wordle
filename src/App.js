@@ -221,7 +221,6 @@ function App() {
         }
       })
     })
-    updateTiles()
     checkForWin();
     return letter.currentRow++, letter.currentTile = 0, handleClick(), letter.currentTile = 0;
   };
@@ -240,17 +239,6 @@ function App() {
       setGameSession([...gameSession], gameSession[0].wins = gameSession[0].wins + 1)
       setGameSession([...gameSession], gameSession[0].totalAttemps[letter.currentRow - 1] = gameSession[0].totalAttemps[letter.currentRow - 1] + 1)
     }, [winState])
-
-
-
-  // probably run this on handleSubmit.
-  const updateTiles = () => {
-    keys.map((key) => {
-      if (key.match == 'EXACT') {
-
-      }
-    })
-  }
 
   return (
     <>

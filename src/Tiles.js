@@ -9,23 +9,25 @@ const Tiles = (props) => {
     letter
   } = props
 
-
-  // convert guessRows to an array of objects with two values, one for tracking letters
-  // and anothor to store bg colour info 
-
-
   return (
     <div className="tile-container">
       {guessRows.map((row, i) => {
         return (
           <div id={`guess-row-index-${i}`} key={i}>
             {row.map((tile, j) => {
+              keys.map((key) => {
+                if (key.key === tile.key && key.match === "EXACT") {
+                  return guessRows[i][j].style = { backgroundColor: '#6aa964' };
+                } else if (key.key === tile.key && key.match === "FOUND") {
+                  return guessRows[i][j].style = { backgroundColor: '#c8b458' };
+                }
+              })
               return (
                 <div
                   id={`guess-row-index-${i}-tile-${j}`}
                   className='tile'
                   key={j}
-                  style={tile.style}
+                  style={guessRows[i][j].style}
                 >
                   {tile.key}
                 </div>

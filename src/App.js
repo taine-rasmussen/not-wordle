@@ -16,39 +16,39 @@ function App() {
   })
   const [guessRows, setGuessRows] = useState([
     [
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } }
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false }
     ],
     [
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } }
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false }
     ],
     [
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } }
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false }
     ],
     [
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } }
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false }
     ],
     [
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } },
-      { key: '', style: { backgroundColor: '' } }
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false },
+      { key: '', style: { backgroundColor: '' }, found: false }
     ]])
 
   const [keys, setKeys] = useState([
@@ -228,17 +228,30 @@ function App() {
   const checkForWin = useCallback(
     () => {
       let submittedWord = []
+      let word = wordle.split('')
       guessRows[letter.currentRow].map((key) => {
         return submittedWord.push(key.key)
       })
+      submittedWord.map((letr) => {
+        guessRows[letter.currentRow].map((rowLetter) => {
+          if (rowLetter.key === letr && rowLetter.found === false && submittedWord.indexOf(rowLetter.key) === word.indexOf(rowLetter.key)) {
+            return rowLetter.found = 'EXACT'
+          } else if ((rowLetter.key === letr && rowLetter.found === false && word.includes(rowLetter.key))) {
+            return rowLetter.found = 'FOUND'
+          } else return;
+        })
+      })
       return submittedWord.join('') == wordle ? setWinState(true) : null
-    }, [winState]);
+    }, [winState, handleSubmit]);
 
   const updateWinCount = useCallback(
     () => {
       setGameSession([...gameSession], gameSession[0].wins = gameSession[0].wins + 1)
       setGameSession([...gameSession], gameSession[0].totalAttemps[letter.currentRow - 1] = gameSession[0].totalAttemps[letter.currentRow - 1] + 1)
     }, [winState])
+
+
+  // Last thing I need to figure out is how to handle double up letters not being overriden with their back ground colour if the other one is in the correct space but the second isn't.
 
   return (
     <>
@@ -257,7 +270,7 @@ function App() {
         <div className="App">
           <div className="game-container">
             <div className="title-container">
-              <h1>{wordle}</h1>
+              <h1>Wordle</h1>
             </div >
             <div className="message-container"></div>
             <Tiles

@@ -15,28 +15,21 @@ const Tiles = (props) => {
         return (
           <div id={`guess-row-index-${i}`} key={i}>
             {row.map((tile, j) => {
-              keys.map((key) => {
-                if (key.key === tile.key && key.match === "EXACT") {
-                  return guessRows[i][j].style = { backgroundColor: '#6aa964' };
-                } else if (key.key === tile.key && key.match === "FOUND") {
-                  return guessRows[i][j].style = { backgroundColor: '#c8b458' };
-                }
-              })
               return (
                 <div
                   id={`guess-row-index-${i}-tile-${j}`}
                   className='tile'
                   key={j}
-                  style={guessRows[i][j].style}
+                  style={tile.found == 'EXACT' ? { backgroundColor: '#6aa964' } : tile.found === 'FOUND' ? { backgroundColor: '#c8b458' } : null}
                 >
-                  {tile.key}
+                  { tile.key}
                 </div>
               )
             })}
           </div>
         )
       })}
-    </div>
+    </div >
   )
 }
 export default Tiles

@@ -71,7 +71,7 @@ function App() {
     { key: 'J', match: '' },
     { key: 'K', match: '' },
     { key: 'L', match: '' },
-    { key: '«', match: '' },
+    { key: 'DEL', match: '' },
     { key: 'Z', match: '' },
     { key: 'X', match: '' },
     { key: 'C', match: '' },
@@ -148,7 +148,7 @@ function App() {
         { key: 'J', match: '' },
         { key: 'K', match: '' },
         { key: 'L', match: '' },
-        { key: '«', match: '' },
+        { key: 'DEL', match: '' },
         { key: 'Z', match: '' },
         { key: 'X', match: '' },
         { key: 'C', match: '' },
@@ -170,7 +170,7 @@ function App() {
       return handleSubmit();
     } else if (key == 'ENTER') return;
 
-    if (key == '«') return handleDelete();
+    if (key == 'DEL') return handleDelete();
     if (letter.currentRow == 5 && letter.currentTile == 5) return;
     if (letter.currentTile == 5) return;
 
@@ -270,7 +270,7 @@ function App() {
         <div className="App">
           <div className="game-container">
             <div className="title-container">
-              <h1>Wordle</h1>
+              <h1>{wordle}</h1>
             </div >
             <div className="message-container"></div>
             <Tiles

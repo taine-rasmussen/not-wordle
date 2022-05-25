@@ -118,12 +118,15 @@ ul {
 .winningscreen-stats-container {
   display: flex;
   flex-direction: column;
-  width: 70%;
-  height: 60%;
+  width: 60%;
+  height: 50%;
   font-size: 2rem;
   margin-top: 3rem;
 }
 
 .winningscreen-footer {
-  margin-top: 3rem;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

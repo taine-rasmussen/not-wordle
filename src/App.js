@@ -250,9 +250,6 @@ function App() {
       setGameSession([...gameSession], gameSession[0].totalAttemps[letter.currentRow - 1] = gameSession[0].totalAttemps[letter.currentRow - 1] + 1)
     }, [winState])
 
-
-  // Last thing I need to figure out is how to handle double up letters not being overriden with their back ground colour if the other one is in the correct space but the second isn't.
-
   return (
     <>
       {winState == true ? (

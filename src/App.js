@@ -267,7 +267,7 @@ function App() {
         <div className="App">
           <div className="game-container">
             <div className="title-container">
-              <h1>{wordle}</h1>
+              <h1>Wordle</h1>
             </div >
             <div className="message-container"></div>
             <Tiles
